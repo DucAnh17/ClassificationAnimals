@@ -1,0 +1,21 @@
+Path to data: 'https://drive.google.com/file/d/1VhHatlJaevn4bdlWug3CreH1uE-uloDH/view?usp=sharing'
+
+The data file used in the document includes 10075 images of 5 different animal species: cat, cow, dog, elephant, penguin. 
+Each class has 1515 images used for training and 500 images used for validation.
+
+**Model Architecture:**
+
+- Use the pre-trained ResNet-50 model with weights from ImageNet, and exclude the final fully connected layer (`include_top=False`).
+- Add a Dropout layer with a rate of 0.3 to mitigate overfitting.
+- Add a Dense layer with the number of output classes equal to the number of labels, use the softmax activation function to predict the probability for each class.
+- Keep the ResNet-50 layers trainable (`trainable=True`).
+
+**Compile Model:**
+
+- Use the Adam optimizer with a learning rate of 0.0001.
+- Use categorical_crossentropy loss function to train the model with labels that have been one-hot encoded.
+- Evaluate the model based on accuracy.
+
+**Callbacks:**
+
+- EarlyStopping to halt training early if validation loss does not decrease after a certain number of epochs (5 epochs), and restore the best weights.
